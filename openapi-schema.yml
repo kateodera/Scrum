@@ -1,0 +1,1061 @@
+openapi: 3.0.2
+info:
+  title: ''
+  version: ''
+paths:
+  /Scrum/listcreatesprint/:
+    get:
+      operationId: listSprints
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                      readOnly: true
+                    owner:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        password:
+                          type: string
+                          maxLength: 128
+                        last_login:
+                          type: string
+                          format: date-time
+                          nullable: true
+                        is_superuser:
+                          type: boolean
+                          description: Designates that this user has all permissions
+                            without explicitly assigning them.
+                        username:
+                          type: string
+                          description: Required. 150 characters or fewer. Letters,
+                            digits and @/./+/-/_ only.
+                          pattern: ^[\w.@+-]+$
+                          maxLength: 150
+                        first_name:
+                          type: string
+                          maxLength: 30
+                        last_name:
+                          type: string
+                          maxLength: 150
+                        email:
+                          type: string
+                          format: email
+                          maxLength: 254
+                        is_staff:
+                          type: boolean
+                          description: Designates whether the user can log into this
+                            admin site.
+                        is_active:
+                          type: boolean
+                          description: Designates whether this user should be treated
+                            as active. Unselect this instead of deleting accounts.
+                        date_joined:
+                          type: string
+                          format: date-time
+                        is_ScrumMaster:
+                          type: boolean
+                        is_Developer:
+                          type: boolean
+                        groups:
+                          type: array
+                          items:
+                            type: integer
+                          description: The groups this user belongs to. A user will
+                            get all permissions granted to each of their groups.
+                        user_permissions:
+                          type: array
+                          items:
+                            type: integer
+                          description: Specific permissions for this user.
+                      required:
+                      - password
+                      - username
+                      type: object
+                      readOnly: true
+                    title:
+                      type: string
+                      maxLength: 255
+                    StartDate:
+                      type: string
+                      format: date-time
+                      readOnly: true
+                    EndDate:
+                      type: string
+                      format: date
+                    status:
+                      enum:
+                      - new
+                      - resolved
+                      - feedback
+                      - closed
+                      - rejected
+                      - product_backlog_item
+                  required:
+                  - title
+                  - EndDate
+          description: ''
+    post:
+      operationId: CreateSprint
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                title:
+                  type: string
+                  maxLength: 255
+                EndDate:
+                  type: string
+                  format: date
+                status:
+                  enum:
+                  - new
+                  - resolved
+                  - feedback
+                  - closed
+                  - rejected
+                  - product_backlog_item
+              required:
+              - title
+              - EndDate
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  owner:
+                    properties:
+                      id:
+                        type: integer
+                        readOnly: true
+                      password:
+                        type: string
+                        maxLength: 128
+                      last_login:
+                        type: string
+                        format: date-time
+                        nullable: true
+                      is_superuser:
+                        type: boolean
+                        description: Designates that this user has all permissions
+                          without explicitly assigning them.
+                      username:
+                        type: string
+                        description: Required. 150 characters or fewer. Letters, digits
+                          and @/./+/-/_ only.
+                        pattern: ^[\w.@+-]+$
+                        maxLength: 150
+                      first_name:
+                        type: string
+                        maxLength: 30
+                      last_name:
+                        type: string
+                        maxLength: 150
+                      email:
+                        type: string
+                        format: email
+                        maxLength: 254
+                      is_staff:
+                        type: boolean
+                        description: Designates whether the user can log into this
+                          admin site.
+                      is_active:
+                        type: boolean
+                        description: Designates whether this user should be treated
+                          as active. Unselect this instead of deleting accounts.
+                      date_joined:
+                        type: string
+                        format: date-time
+                      is_ScrumMaster:
+                        type: boolean
+                      is_Developer:
+                        type: boolean
+                      groups:
+                        type: array
+                        items:
+                          type: integer
+                        description: The groups this user belongs to. A user will
+                          get all permissions granted to each of their groups.
+                      user_permissions:
+                        type: array
+                        items:
+                          type: integer
+                        description: Specific permissions for this user.
+                    required:
+                    - password
+                    - username
+                    type: object
+                    readOnly: true
+                  title:
+                    type: string
+                    maxLength: 255
+                  StartDate:
+                    type: string
+                    format: date-time
+                    readOnly: true
+                  EndDate:
+                    type: string
+                    format: date
+                  status:
+                    enum:
+                    - new
+                    - resolved
+                    - feedback
+                    - closed
+                    - rejected
+                    - product_backlog_item
+                required:
+                - title
+                - EndDate
+          description: ''
+  /Scrum/reupdesprint/{id}/:
+    get:
+      operationId: RetrieveSprint
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this sprint.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  owner:
+                    properties:
+                      id:
+                        type: integer
+                        readOnly: true
+                      password:
+                        type: string
+                        maxLength: 128
+                      last_login:
+                        type: string
+                        format: date-time
+                        nullable: true
+                      is_superuser:
+                        type: boolean
+                        description: Designates that this user has all permissions
+                          without explicitly assigning them.
+                      username:
+                        type: string
+                        description: Required. 150 characters or fewer. Letters, digits
+                          and @/./+/-/_ only.
+                        pattern: ^[\w.@+-]+$
+                        maxLength: 150
+                      first_name:
+                        type: string
+                        maxLength: 30
+                      last_name:
+                        type: string
+                        maxLength: 150
+                      email:
+                        type: string
+                        format: email
+                        maxLength: 254
+                      is_staff:
+                        type: boolean
+                        description: Designates whether the user can log into this
+                          admin site.
+                      is_active:
+                        type: boolean
+                        description: Designates whether this user should be treated
+                          as active. Unselect this instead of deleting accounts.
+                      date_joined:
+                        type: string
+                        format: date-time
+                      is_ScrumMaster:
+                        type: boolean
+                      is_Developer:
+                        type: boolean
+                      groups:
+                        type: array
+                        items:
+                          type: integer
+                        description: The groups this user belongs to. A user will
+                          get all permissions granted to each of their groups.
+                      user_permissions:
+                        type: array
+                        items:
+                          type: integer
+                        description: Specific permissions for this user.
+                    required:
+                    - password
+                    - username
+                    type: object
+                    readOnly: true
+                  title:
+                    type: string
+                    maxLength: 255
+                  StartDate:
+                    type: string
+                    format: date-time
+                    readOnly: true
+                  EndDate:
+                    type: string
+                    format: date
+                  status:
+                    enum:
+                    - new
+                    - resolved
+                    - feedback
+                    - closed
+                    - rejected
+                    - product_backlog_item
+                required:
+                - title
+                - EndDate
+          description: ''
+    put:
+      operationId: UpdateSprint
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this sprint.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                title:
+                  type: string
+                  maxLength: 255
+                EndDate:
+                  type: string
+                  format: date
+                status:
+                  enum:
+                  - new
+                  - resolved
+                  - feedback
+                  - closed
+                  - rejected
+                  - product_backlog_item
+              required:
+              - title
+              - EndDate
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  owner:
+                    properties:
+                      id:
+                        type: integer
+                        readOnly: true
+                      password:
+                        type: string
+                        maxLength: 128
+                      last_login:
+                        type: string
+                        format: date-time
+                        nullable: true
+                      is_superuser:
+                        type: boolean
+                        description: Designates that this user has all permissions
+                          without explicitly assigning them.
+                      username:
+                        type: string
+                        description: Required. 150 characters or fewer. Letters, digits
+                          and @/./+/-/_ only.
+                        pattern: ^[\w.@+-]+$
+                        maxLength: 150
+                      first_name:
+                        type: string
+                        maxLength: 30
+                      last_name:
+                        type: string
+                        maxLength: 150
+                      email:
+                        type: string
+                        format: email
+                        maxLength: 254
+                      is_staff:
+                        type: boolean
+                        description: Designates whether the user can log into this
+                          admin site.
+                      is_active:
+                        type: boolean
+                        description: Designates whether this user should be treated
+                          as active. Unselect this instead of deleting accounts.
+                      date_joined:
+                        type: string
+                        format: date-time
+                      is_ScrumMaster:
+                        type: boolean
+                      is_Developer:
+                        type: boolean
+                      groups:
+                        type: array
+                        items:
+                          type: integer
+                        description: The groups this user belongs to. A user will
+                          get all permissions granted to each of their groups.
+                      user_permissions:
+                        type: array
+                        items:
+                          type: integer
+                        description: Specific permissions for this user.
+                    required:
+                    - password
+                    - username
+                    type: object
+                    readOnly: true
+                  title:
+                    type: string
+                    maxLength: 255
+                  StartDate:
+                    type: string
+                    format: date-time
+                    readOnly: true
+                  EndDate:
+                    type: string
+                    format: date
+                  status:
+                    enum:
+                    - new
+                    - resolved
+                    - feedback
+                    - closed
+                    - rejected
+                    - product_backlog_item
+                required:
+                - title
+                - EndDate
+          description: ''
+    patch:
+      operationId: PartialUpdateSprint
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this sprint.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                title:
+                  type: string
+                  maxLength: 255
+                EndDate:
+                  type: string
+                  format: date
+                status:
+                  enum:
+                  - new
+                  - resolved
+                  - feedback
+                  - closed
+                  - rejected
+                  - product_backlog_item
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  owner:
+                    properties:
+                      id:
+                        type: integer
+                        readOnly: true
+                      password:
+                        type: string
+                        maxLength: 128
+                      last_login:
+                        type: string
+                        format: date-time
+                        nullable: true
+                      is_superuser:
+                        type: boolean
+                        description: Designates that this user has all permissions
+                          without explicitly assigning them.
+                      username:
+                        type: string
+                        description: Required. 150 characters or fewer. Letters, digits
+                          and @/./+/-/_ only.
+                        pattern: ^[\w.@+-]+$
+                        maxLength: 150
+                      first_name:
+                        type: string
+                        maxLength: 30
+                      last_name:
+                        type: string
+                        maxLength: 150
+                      email:
+                        type: string
+                        format: email
+                        maxLength: 254
+                      is_staff:
+                        type: boolean
+                        description: Designates whether the user can log into this
+                          admin site.
+                      is_active:
+                        type: boolean
+                        description: Designates whether this user should be treated
+                          as active. Unselect this instead of deleting accounts.
+                      date_joined:
+                        type: string
+                        format: date-time
+                      is_ScrumMaster:
+                        type: boolean
+                      is_Developer:
+                        type: boolean
+                      groups:
+                        type: array
+                        items:
+                          type: integer
+                        description: The groups this user belongs to. A user will
+                          get all permissions granted to each of their groups.
+                      user_permissions:
+                        type: array
+                        items:
+                          type: integer
+                        description: Specific permissions for this user.
+                    required:
+                    - password
+                    - username
+                    type: object
+                    readOnly: true
+                  title:
+                    type: string
+                    maxLength: 255
+                  StartDate:
+                    type: string
+                    format: date-time
+                    readOnly: true
+                  EndDate:
+                    type: string
+                    format: date
+                  status:
+                    enum:
+                    - new
+                    - resolved
+                    - feedback
+                    - closed
+                    - rejected
+                    - product_backlog_item
+                required:
+                - title
+                - EndDate
+          description: ''
+    delete:
+      operationId: DestroySprint
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this sprint.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+  /Scrum/listcreatetask/:
+    get:
+      operationId: listTasks
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                      readOnly: true
+                    owner:
+                      properties:
+                        id:
+                          type: integer
+                          readOnly: true
+                        password:
+                          type: string
+                          maxLength: 128
+                        last_login:
+                          type: string
+                          format: date-time
+                          nullable: true
+                        is_superuser:
+                          type: boolean
+                          description: Designates that this user has all permissions
+                            without explicitly assigning them.
+                        username:
+                          type: string
+                          description: Required. 150 characters or fewer. Letters,
+                            digits and @/./+/-/_ only.
+                          pattern: ^[\w.@+-]+$
+                          maxLength: 150
+                        first_name:
+                          type: string
+                          maxLength: 30
+                        last_name:
+                          type: string
+                          maxLength: 150
+                        email:
+                          type: string
+                          format: email
+                          maxLength: 254
+                        is_staff:
+                          type: boolean
+                          description: Designates whether the user can log into this
+                            admin site.
+                        is_active:
+                          type: boolean
+                          description: Designates whether this user should be treated
+                            as active. Unselect this instead of deleting accounts.
+                        date_joined:
+                          type: string
+                          format: date-time
+                        is_ScrumMaster:
+                          type: boolean
+                        is_Developer:
+                          type: boolean
+                        groups:
+                          type: array
+                          items:
+                            type: integer
+                          description: The groups this user belongs to. A user will
+                            get all permissions granted to each of their groups.
+                        user_permissions:
+                          type: array
+                          items:
+                            type: integer
+                          description: Specific permissions for this user.
+                      required:
+                      - password
+                      - username
+                      type: object
+                      readOnly: true
+                    title:
+                      type: string
+                      maxLength: 255
+                    StartDate:
+                      type: string
+                      format: date-time
+                      readOnly: true
+                    EndDate:
+                      type: string
+                      format: date
+                    status:
+                      enum:
+                      - new
+                      - resolved
+                      - feedback
+                      - closed
+                      - rejected
+                      - product_backlog_item
+                  required:
+                  - title
+                  - EndDate
+          description: ''
+    post:
+      operationId: CreateTask
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                title:
+                  type: string
+                  maxLength: 255
+                EndDate:
+                  type: string
+                  format: date
+                status:
+                  enum:
+                  - new
+                  - resolved
+                  - feedback
+                  - closed
+                  - rejected
+                  - product_backlog_item
+              required:
+              - title
+              - EndDate
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  owner:
+                    properties:
+                      id:
+                        type: integer
+                        readOnly: true
+                      password:
+                        type: string
+                        maxLength: 128
+                      last_login:
+                        type: string
+                        format: date-time
+                        nullable: true
+                      is_superuser:
+                        type: boolean
+                        description: Designates that this user has all permissions
+                          without explicitly assigning them.
+                      username:
+                        type: string
+                        description: Required. 150 characters or fewer. Letters, digits
+                          and @/./+/-/_ only.
+                        pattern: ^[\w.@+-]+$
+                        maxLength: 150
+                      first_name:
+                        type: string
+                        maxLength: 30
+                      last_name:
+                        type: string
+                        maxLength: 150
+                      email:
+                        type: string
+                        format: email
+                        maxLength: 254
+                      is_staff:
+                        type: boolean
+                        description: Designates whether the user can log into this
+                          admin site.
+                      is_active:
+                        type: boolean
+                        description: Designates whether this user should be treated
+                          as active. Unselect this instead of deleting accounts.
+                      date_joined:
+                        type: string
+                        format: date-time
+                      is_ScrumMaster:
+                        type: boolean
+                      is_Developer:
+                        type: boolean
+                      groups:
+                        type: array
+                        items:
+                          type: integer
+                        description: The groups this user belongs to. A user will
+                          get all permissions granted to each of their groups.
+                      user_permissions:
+                        type: array
+                        items:
+                          type: integer
+                        description: Specific permissions for this user.
+                    required:
+                    - password
+                    - username
+                    type: object
+                    readOnly: true
+                  title:
+                    type: string
+                    maxLength: 255
+                  StartDate:
+                    type: string
+                    format: date-time
+                    readOnly: true
+                  EndDate:
+                    type: string
+                    format: date
+                  status:
+                    enum:
+                    - new
+                    - resolved
+                    - feedback
+                    - closed
+                    - rejected
+                    - product_backlog_item
+                required:
+                - title
+                - EndDate
+          description: ''
+  /Scrum/reupdetask/{id}/:
+    get:
+      operationId: RetrieveTask
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this task.
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  sprint:
+                    properties:
+                      id:
+                        type: integer
+                        readOnly: true
+                      title:
+                        type: string
+                        maxLength: 255
+                    required:
+                    - title
+                    type: object
+                  title:
+                    type: string
+                    maxLength: 250
+                  StartDate:
+                    type: string
+                    format: date-time
+                    readOnly: true
+                  EndDate:
+                    type: string
+                    format: date
+                  status:
+                    enum:
+                    - new
+                    - resolved
+                    - feedback
+                    - closed
+                    - rejected
+                  owner:
+                    type: integer
+                    nullable: true
+                required:
+                - sprint
+                - title
+                - EndDate
+          description: ''
+    put:
+      operationId: UpdateTask
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this task.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                sprint:
+                  properties:
+                    id:
+                      type: integer
+                      readOnly: true
+                    title:
+                      type: string
+                      maxLength: 255
+                  required:
+                  - title
+                  type: object
+                title:
+                  type: string
+                  maxLength: 250
+                EndDate:
+                  type: string
+                  format: date
+                status:
+                  enum:
+                  - new
+                  - resolved
+                  - feedback
+                  - closed
+                  - rejected
+                owner:
+                  type: integer
+                  nullable: true
+              required:
+              - sprint
+              - title
+              - EndDate
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  sprint:
+                    properties:
+                      id:
+                        type: integer
+                        readOnly: true
+                      title:
+                        type: string
+                        maxLength: 255
+                    required:
+                    - title
+                    type: object
+                  title:
+                    type: string
+                    maxLength: 250
+                  StartDate:
+                    type: string
+                    format: date-time
+                    readOnly: true
+                  EndDate:
+                    type: string
+                    format: date
+                  status:
+                    enum:
+                    - new
+                    - resolved
+                    - feedback
+                    - closed
+                    - rejected
+                  owner:
+                    type: integer
+                    nullable: true
+                required:
+                - sprint
+                - title
+                - EndDate
+          description: ''
+    patch:
+      operationId: PartialUpdateTask
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this task.
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                sprint:
+                  properties:
+                    id:
+                      type: integer
+                      readOnly: true
+                    title:
+                      type: string
+                      maxLength: 255
+                  required:
+                  - title
+                  type: object
+                title:
+                  type: string
+                  maxLength: 250
+                EndDate:
+                  type: string
+                  format: date
+                status:
+                  enum:
+                  - new
+                  - resolved
+                  - feedback
+                  - closed
+                  - rejected
+                owner:
+                  type: integer
+                  nullable: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: integer
+                    readOnly: true
+                  sprint:
+                    properties:
+                      id:
+                        type: integer
+                        readOnly: true
+                      title:
+                        type: string
+                        maxLength: 255
+                    required:
+                    - title
+                    type: object
+                  title:
+                    type: string
+                    maxLength: 250
+                  StartDate:
+                    type: string
+                    format: date-time
+                    readOnly: true
+                  EndDate:
+                    type: string
+                    format: date
+                  status:
+                    enum:
+                    - new
+                    - resolved
+                    - feedback
+                    - closed
+                    - rejected
+                  owner:
+                    type: integer
+                    nullable: true
+                required:
+                - sprint
+                - title
+                - EndDate
+          description: ''
+    delete:
+      operationId: DestroyTask
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this task.
+        schema:
+          type: string
+      responses:
+        '204':
+          description: ''
+  /Scrum/swagger-docs/:
+    get:
+      operationId: listSwaggerSchemas
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items: {}
+          description: ''

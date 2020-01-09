@@ -5,8 +5,10 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
+    username =  models.CharField(max_length=255,unique=True)
     is_ScrumMaster = models.BooleanField(default=False)
     is_Developer = models.BooleanField(default=False)
+    USERNAME_FIELD =  'username'
 
 
 class Sprint(models.Model):
@@ -31,8 +33,6 @@ class Sprint(models.Model):
 
     class Meta:
         ordering = ('-status',)
-
-
 
 
 class Task(models.Model):

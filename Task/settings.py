@@ -25,7 +25,7 @@ SECRET_KEY = 'v%gjg27e*c30=5n=%o)jf@+7s+83(3#56$7u#31lt^2-i5bwgz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['']
+ALLOWED_HOSTS = ['*']
 
 SWAGGER_SETTINGS = {
     'SHOW_REQUEST_HEADERS': True,

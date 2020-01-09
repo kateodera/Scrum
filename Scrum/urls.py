@@ -7,7 +7,7 @@ from rest_framework.documentation import include_docs_urls
 schema_view = get_swagger_view(title='Scrum API')
 
 urlpatterns = [
-    path('listcreatesprint/', ListCreateSprintView.as_view()),
+    path('listcreatesprint/', ListCreateSprintView.as_view(),name='listcreatesprint'),
     path('reupdesprint/<int:pk>/', RetrieveUpdateDeleteSprintView.as_view()),
     path('listcreatetask/', ListCreateTaskView.as_view()),
     path('reupdetask/<int:pk>/', RetrieveUpdateDeleteTaskView.as_view()),
